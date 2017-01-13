@@ -45,7 +45,7 @@ const install = function (Vue, initConf = {}) {
       params.name = initConf.trackingObjectData[index].name
       pluginConfig.trackingObjects.push(initConf.trackingObjectData[index].name)
     }
-    ga('create', initConf.trackingId, 'auto', params)
+    ga('create', initConf.trackingObjectData[index].trackingId, 'auto', params)
   }
 
   // Inject global dimensions
