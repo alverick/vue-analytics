@@ -33,11 +33,9 @@ const install = function (Vue, initConf = {}) {
 
   // Register tracker
   for(var index in initConf.trackingObjectData) {
-    const params = {
-      transport: 'beacon',
-      appName: initConf.trackingObjectData[index].appName,
-      appVersion: initConf.trackingObjectData[index].appVersion
-    }
+    const params = initConf.trackingObjectData[index]
+    params.transport = 'beacon'
+
     if (index > 0) {
       if (!initConf.trackingObjectData[index].hasOwnProperty('name')){
         initConf.trackingObjectData[index].name = 'object' + index
