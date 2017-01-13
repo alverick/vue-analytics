@@ -12,6 +12,23 @@ export default class AnalyticsPlugin {
   }
 
   /**
+   * Dispatch an analytics pageview
+   *
+   * @param page
+   */
+  trackPage (page) {
+    logDebug('Dispatching pageview', { page})
+
+    ga('send', 'pageview', page)
+
+    if (pluginConfig.trackingObjects.length > 0) {
+      for(var index in pluginConfig.trackingObjects){
+        ga(pluginConfig.trackingObjects[index] + '.send', 'pageview', page)
+      }
+    }
+  }
+
+  /**
    * Dispatch an analytics event
    *
    * @param category
@@ -24,6 +41,12 @@ export default class AnalyticsPlugin {
     logDebug('Dispatching event', { category, action, label, value})
 
     ga('send', 'event', category, action, label, value)
+
+    if (pluginConfig.trackingObjects.length > 0) {
+      for(var index in pluginConfig.trackingObjects){
+        ga(pluginConfig.trackingObjects[index] + '.send', 'event', category, action, label, value)
+      }
+    }
   }
 
   /**
